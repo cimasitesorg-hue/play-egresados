@@ -1,0 +1,75 @@
+---
+/* SEO por página: title, description, Open Graph, Twitter, canonical + JSON-LD. */
+import { site, zonas } from "@/data/site";
+import { withBase } from "@/lib/paths";
+
+interface Props {
+  title: string;
+  description: string;
+  /* ruta relativa, ej "/servicios/" para el canonical */
+  path?: string;
+  image?: string;
+}
+
+const {
+  title,
+  description,
+  path = "",
+  image = "/og-image.jpg",
+} = Astro.props;
+
+const siteUrl = Astro.site?.toString().replace(/\/$/, "") ?? "";
+const canonical = `${siteUrl}${withBase(path)}`;
+const ogImage = `${siteUrl}${withBase(image)}`;
+const homeUrl = `${siteUrl}${withBase("/")}`;
+const fullTitle = `${title} · ${site.name}`;
+
+// JSON-LD: negocio local (SEO local CABA / zona oeste)
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  name: site.name,
+  description: site.descripcion,
+  url: homeUrl,
+  image: ogImage,
+  telephone: `+${site.whatsappNumber}`,
+  areaServed: zonas.map((z) => ({
+    "@type": "Place",
+    name: `${z}, CABA`,
+  })),
+  address: {
+    "@type": "PostalAddress",
+    addressLocality: "Ciudad Autónoma de Buenos Aires",
+    addressRegion: "CABA",
+    addressCountry: "AR",
+  },
+  sameAs: [site.instagram],
+};
+---
+
+<title>{fullTitle}</title>
+<meta name="description" content={description} />
+<link rel="canonical" href={canonical} />
+<meta
+  name="keywords"
+  content="previas egresados CABA, UPD egresados, productora egresados, party bus egresados, previas zona oeste, egresados Flores Caballito Devoto Mataderos Villa Pueyrredón"
+/>
+
+<!-- Open Graph -->
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content={site.name} />
+<meta property="og:title" content={fullTitle} />
+<meta property="og:description" content={description} />
+<meta property="og:url" content={canonical} />
+<meta property="og:image" content={ogImage} />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:locale" content="es_AR" />
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content={fullTitle} />
+<meta name="twitter:description" content={description} />
+<meta name="twitter:image" content={ogImage} />
+
+<script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />

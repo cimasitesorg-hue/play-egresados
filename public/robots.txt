@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://cimasitesorg-hue.github.io/play-egresados/sitemap-index.xml

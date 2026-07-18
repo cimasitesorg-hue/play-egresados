@@ -1,0 +1,217 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import Icon from "@/components/Icon.astro";
+import ServiceAccordion from "@/components/ServiceAccordion.astro";
+import { servicios, beneficios, pasosContratar } from "@/data/servicios";
+import { waLink } from "@/data/site";
+---
+
+<BaseLayout
+  title="Servicios — todo lo que incluye la producción"
+  description="Salón con pista y pantallas LED, party bus, barra libre con barmans, seguridad en unidades, fotografía, lunch y pizza libre, juegos, servicio médico y sector para padres VIP. Mirá el detalle completo."
+  path="/servicios/"
+>
+  {/* ===== Cabecera ===== */}
+  <section class="page-hero">
+    <div class="container-x">
+      <span class="chip reveal">
+        <Icon name="spark" size={15} />
+        Todo incluido en un solo servicio
+      </span>
+      <h1 class="page-hero__title font-display reveal" style="--i:1">
+        Nuestros servicios
+      </h1>
+      <p class="page-hero__lead reveal" style="--i:2">
+        Cada evento de PLAY incluye una producción completa. Tocá cada servicio
+        para ver el detalle de lo que recibís.
+      </p>
+    </div>
+  </section>
+
+  {/* ===== Acordeones de servicios ===== */}
+  <section class="section">
+    <div class="container-x acc-list">
+      {servicios.map((s, i) => <ServiceAccordion servicio={s} open={i === 0} />)}
+    </div>
+  </section>
+
+  {/* ===== Beneficios ===== */}
+  <section class="section section--soft">
+    <div class="container-x">
+      <div class="section__head">
+        <p class="kicker reveal">Beneficios del curso</p>
+        <h2 class="section__title reveal" style="--i:1">
+          Extras que suman al recorrido
+        </h2>
+        <p class="section__lead reveal" style="--i:2">
+          Además de la producción del evento, tu curso accede a beneficios
+          pensados para acompañar todo el año.
+        </p>
+      </div>
+      <ul class="benef-grid">
+        {
+          beneficios.map((b, i) => (
+            <li class="benef reveal" style={`--i:${i}`}>
+              <span class="benef__icon">
+                <Icon name="trophy" size={22} />
+              </span>
+              <span>{b}</span>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+
+  {/* ===== Cómo contratar ===== */}
+  <section class="section">
+    <div class="container-x">
+      <div class="section__head">
+        <h2 class="section__title reveal">Cómo contratar</h2>
+        <p class="section__lead reveal" style="--i:1">
+          Reservar tu producción con PLAY es simple. Son tres pasos.
+        </p>
+      </div>
+
+      <ol class="pasos">
+        {
+          pasosContratar.map((p, i) => (
+            <li class="paso reveal" style={`--i:${i}`}>
+              <span class="paso__n font-display">{p.n}</span>
+              <div>
+                <h3 class="paso__title">{p.titulo}</h3>
+                <p class="paso__text">{p.texto}</p>
+              </div>
+            </li>
+          ))
+        }
+      </ol>
+
+      <div class="section__cta reveal">
+        <a href={waLink} target="_blank" rel="noopener" class="btn btn--wa">
+          <Icon name="wa" size={20} />
+          <span>Pedí tu presupuesto</span>
+        </a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .acc-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.9rem;
+  }
+
+  /* Beneficios */
+  .benef-grid {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: 1fr;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  .benef {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1.25rem 1.35rem;
+    border-radius: 1rem;
+    background: oklch(0.23 0.04 262 / 0.45);
+    border: 1px solid var(--color-line);
+    font-weight: 600;
+    color: var(--color-ink-soft);
+    transition:
+      transform 0.24s var(--ease-out),
+      border-color 0.24s var(--ease-out);
+  }
+  .benef:hover {
+    transform: translateY(-3px);
+    border-color: oklch(0.62 0.2 258 / 0.5);
+  }
+  @media (hover: none) {
+    .benef:hover {
+      transform: none;
+    }
+  }
+  .benef__icon {
+    flex: none;
+    display: grid;
+    place-items: center;
+    width: 46px;
+    height: 46px;
+    border-radius: 12px;
+    color: var(--color-brand-glow);
+    background: oklch(0.62 0.2 258 / 0.14);
+    border: 1px solid oklch(0.62 0.2 258 / 0.28);
+  }
+
+  /* Pasos */
+  .pasos {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: 1fr;
+    counter-reset: paso;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  .paso {
+    display: flex;
+    align-items: flex-start;
+    gap: 1.1rem;
+    padding: 1.6rem;
+    border-radius: 1.1rem;
+    background: linear-gradient(
+      180deg,
+      oklch(0.24 0.05 262 / 0.55),
+      oklch(0.17 0.03 262 / 0.55)
+    );
+    border: 1px solid var(--color-line);
+  }
+  .paso__n {
+    flex: none;
+    display: grid;
+    place-items: center;
+    width: 52px;
+    height: 52px;
+    border-radius: 14px;
+    font-size: 1.7rem;
+    color: white;
+    background: linear-gradient(
+      140deg,
+      var(--color-brand-bright),
+      var(--color-brand)
+    );
+    box-shadow: 0 10px 26px -10px oklch(0.62 0.2 258 / 0.9);
+  }
+  .paso__title {
+    font-size: 1.2rem;
+    margin: 0.2rem 0 0.4rem;
+    color: var(--color-ink);
+  }
+  .paso__text {
+    margin: 0;
+    color: var(--color-muted);
+    font-size: 0.98rem;
+  }
+  .section__cta {
+    margin-top: 2.5rem;
+    display: flex;
+    justify-content: center;
+  }
+
+  @media (min-width: 680px) {
+    .benef-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+    .pasos {
+      grid-template-columns: repeat(3, 1fr);
+    }
+    .paso {
+      flex-direction: column;
+    }
+  }
+</style>

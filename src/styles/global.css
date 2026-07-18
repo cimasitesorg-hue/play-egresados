@@ -1,0 +1,395 @@
+@import "tailwindcss";
+
+/* Fuentes self-hosted (sin request externo => más rápido y privado) */
+@import "@fontsource/anton/400.css";
+@import "@fontsource-variable/manrope";
+
+/* ============================================================
+   PLAY EGRESADOS — Sistema de diseño
+   Estética: nocturna, energética, "boliche premium" para egresados.
+   Estrategia de color: superficie oscura profunda + azul de marca eléctrico.
+   ============================================================ */
+
+@theme {
+  /* — Color (OKLCH) — el azul se extrae del logo oficial (~#0B4EA2) — */
+  --color-bg: oklch(0.15 0.028 262); /* fondo base casi negro azulado */
+  --color-bg-soft: oklch(0.19 0.035 262); /* superficie levemente elevada */
+  --color-surface: oklch(0.23 0.04 262); /* cards */
+  --color-surface-2: oklch(0.27 0.045 262); /* card hover / elevado */
+  --color-line: oklch(0.34 0.045 262); /* bordes */
+
+  --color-brand: oklch(0.48 0.16 260); /* azul del logo */
+  --color-brand-bright: oklch(0.62 0.2 258); /* azul eléctrico: CTAs, links, glow */
+  --color-brand-glow: oklch(0.7 0.19 256); /* highlight / halo */
+
+  --color-ink: oklch(0.98 0.004 260); /* texto principal */
+  --color-ink-soft: oklch(0.86 0.012 262); /* texto secundario */
+  --color-muted: oklch(0.72 0.02 262); /* texto atenuado (cumple 4.5:1 sobre bg) */
+
+  --color-wa: #25d366; /* verde WhatsApp (solo botón WA) */
+  --color-wa-dark: #1da851;
+
+  /* — Tipografía — */
+  --font-display: "Anton", "Arial Narrow", sans-serif;
+  --font-sans:
+    "Manrope Variable", "Manrope", ui-sans-serif, system-ui, -apple-system,
+    "Segoe UI", Roboto, sans-serif;
+
+  /* — Curvas de easing (criterio Emil Kowalski: curvas fuertes, no las default) — */
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1); /* entradas: arranca rápido = responsivo */
+  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1); /* movimiento en pantalla */
+  --ease-drawer: cubic-bezier(0.32, 0.72, 0, 1); /* menú / paneles */
+
+  /* — Z-index semántico (nunca valores mágicos tipo 9999) — */
+  --z-parallax: 0;
+  --z-content: 10;
+  --z-nav: 40;
+  --z-menu: 50;
+  --z-float: 60;
+  --z-toast: 70;
+}
+
+/* ---------- Reset / base ---------- */
+* {
+  min-width: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+  background: var(--color-bg);
+}
+
+body {
+  margin: 0;
+  background:
+    radial-gradient(
+      120% 80% at 50% -10%,
+      oklch(0.28 0.09 262 / 0.55),
+      transparent 60%
+    ),
+    var(--color-bg);
+  color: var(--color-ink-soft);
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overflow-x: hidden;
+}
+
+::selection {
+  background: var(--color-brand-bright);
+  color: white;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  color: var(--color-ink);
+  line-height: 1.02;
+  text-wrap: balance;
+}
+
+/* Utilidad de familia display (títulos con impacto tipo placa nocturna) */
+.font-display {
+  font-family: var(--font-display);
+  font-weight: 400;
+  letter-spacing: 0.005em;
+  text-transform: uppercase;
+}
+
+p {
+  text-wrap: pretty;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-brand-glow);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* Contenedor estándar */
+.container-x {
+  width: 100%;
+  max-width: 75rem; /* 1200px */
+  margin-inline: auto;
+  padding-inline: clamp(1.15rem, 5vw, 2.5rem);
+}
+
+/* ---------- Texto con degradé de acento controlado ----------
+   (solo para el highlight de marca dentro de párrafos, no como título) */
+.accent {
+  color: var(--color-brand-bright);
+}
+
+/* ---------- Secciones (sistema compartido entre páginas) ---------- */
+.section {
+  position: relative;
+  padding-block: clamp(3.5rem, 8vw, 6rem);
+}
+.section--soft {
+  background:
+    radial-gradient(
+      80% 60% at 100% 0%,
+      oklch(0.28 0.09 262 / 0.25),
+      transparent 60%
+    ),
+    oklch(0.17 0.03 262 / 0.5);
+  border-block: 1px solid var(--color-line);
+}
+.section__head {
+  max-width: 48rem;
+  margin-bottom: clamp(2rem, 5vw, 3rem);
+}
+.kicker {
+  display: inline-block;
+  font-weight: 700;
+  font-size: 0.82rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-brand-glow);
+  margin: 0 0 0.9rem;
+}
+.section__title {
+  font-size: clamp(1.75rem, 4.6vw, 2.9rem);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  margin: 0;
+}
+.section__lead {
+  margin: 1rem 0 0;
+  color: var(--color-muted);
+  font-size: 1.06rem;
+  max-width: 54ch;
+}
+
+/* ---------- Cabecera interior de página ---------- */
+.page-hero {
+  position: relative;
+  padding-block: clamp(3rem, 9vw, 5.5rem) clamp(2rem, 5vw, 3rem);
+  overflow: hidden;
+  isolation: isolate;
+  border-bottom: 1px solid var(--color-line);
+}
+.page-hero::before {
+  content: "";
+  position: absolute;
+  inset: -40% 0 auto;
+  height: 120%;
+  z-index: -1;
+  background: radial-gradient(
+    60% 70% at 20% 0%,
+    oklch(0.34 0.12 260 / 0.4),
+    transparent 60%
+  );
+}
+.page-hero__title {
+  font-size: clamp(2.6rem, 9vw, 4.75rem);
+  line-height: 0.95;
+  margin: 0.8rem 0 0;
+  color: var(--color-ink);
+}
+.page-hero__lead {
+  margin: 1.2rem 0 0;
+  max-width: 54ch;
+  color: var(--color-ink-soft);
+  font-size: clamp(1rem, 2.3vw, 1.15rem);
+}
+
+/* ============================================================
+   SISTEMA DE REVEAL POR SCROLL
+   El contenido es visible por defecto; un script agrega .in-view.
+   Si JS falla o hay reduce-motion, se ve igual (no se oculta contenido).
+   ============================================================ */
+/* El ocultamiento inicial solo aplica si JS está activo (.js en <html>).
+   Sin JS, el contenido se ve siempre (nunca "página en blanco"). */
+@media (prefers-reduced-motion: no-preference) {
+  .js .reveal {
+    opacity: 0;
+    transform: translateY(20px);
+    filter: blur(4px);
+    transition:
+      opacity 0.6s var(--ease-out),
+      transform 0.6s var(--ease-out),
+      filter 0.6s var(--ease-out);
+  }
+  .js .reveal.in-view {
+    opacity: 1;
+    transform: none;
+    filter: none;
+  }
+  /* Escalonado: cada hijo con --i entra con delay (30–80ms, criterio Emil) */
+  .js .reveal[style*="--i"] {
+    transition-delay: calc(var(--i) * 55ms);
+  }
+}
+
+/* ---------- Botones ---------- */
+.btn {
+  --_bg: var(--color-brand-bright);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6em;
+  font-weight: 700;
+  font-size: 1rem;
+  line-height: 1;
+  padding: 1rem 1.6rem;
+  border-radius: 999px;
+  min-height: 48px; /* touch target */
+  background: var(--_bg);
+  color: white;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition:
+    transform 0.16s var(--ease-out),
+    box-shadow 0.24s var(--ease-out),
+    background-color 0.24s var(--ease-out);
+  box-shadow: 0 8px 30px -8px oklch(0.62 0.2 258 / 0.6);
+}
+.btn:hover {
+  box-shadow: 0 12px 40px -6px oklch(0.62 0.2 258 / 0.75);
+  background: var(--color-brand-glow);
+}
+.btn:active {
+  transform: scale(0.97);
+}
+.btn--wa {
+  --_bg: var(--color-wa);
+  box-shadow: 0 8px 30px -8px rgb(37 211 102 / 0.55);
+}
+.btn--wa:hover {
+  background: var(--color-wa-dark);
+  box-shadow: 0 12px 40px -6px rgb(37 211 102 / 0.7);
+}
+.btn--ghost {
+  background: transparent;
+  border-color: var(--color-line);
+  color: var(--color-ink);
+  box-shadow: none;
+}
+.btn--ghost:hover {
+  background: oklch(0.27 0.045 262 / 0.6);
+  border-color: var(--color-brand-bright);
+  box-shadow: none;
+}
+
+/* ---------- Chips / tags ---------- */
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45em;
+  padding: 0.4rem 0.85rem;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: var(--color-brand-glow);
+  background: oklch(0.62 0.2 258 / 0.12);
+  border: 1px solid oklch(0.62 0.2 258 / 0.28);
+}
+
+/* ---------- Card base ---------- */
+.card {
+  background:
+    linear-gradient(
+      180deg,
+      oklch(0.27 0.045 262 / 0.5),
+      oklch(0.19 0.035 262 / 0.5)
+    );
+  border: 1px solid var(--color-line);
+  border-radius: 1.1rem;
+}
+
+/* Halo sutil detrás de secciones destacadas */
+.glow-top::before {
+  content: "";
+  position: absolute;
+  inset: -1px -1px auto;
+  height: 2px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--color-brand-bright),
+    transparent
+  );
+  opacity: 0.7;
+}
+
+/* ---------- Marquee (cinta tipo placa "PLAY EGRESADOS · ...") ---------- */
+.marquee {
+  overflow: hidden;
+  white-space: nowrap;
+  -webkit-mask-image: linear-gradient(
+    90deg,
+    transparent,
+    #000 8%,
+    #000 92%,
+    transparent
+  );
+  mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+}
+.marquee__track {
+  display: inline-flex;
+  gap: 2.5rem;
+  animation: marquee 28s linear infinite;
+}
+.marquee:hover .marquee__track {
+  animation-play-state: paused;
+}
+@keyframes marquee {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+/* ---------- Transiciones de página (Astro View Transitions) ---------- */
+@media (prefers-reduced-motion: no-preference) {
+  ::view-transition-old(root) {
+    animation: vt-out 0.28s var(--ease-out) both;
+  }
+  ::view-transition-new(root) {
+    animation: vt-in 0.42s var(--ease-out) both;
+  }
+  @keyframes vt-out {
+    to {
+      opacity: 0;
+      transform: translateY(-8px);
+    }
+  }
+  @keyframes vt-in {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+  }
+}
+
+/* ---------- Reduced motion global ---------- */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+  .marquee__track {
+    animation: none;
+  }
+}

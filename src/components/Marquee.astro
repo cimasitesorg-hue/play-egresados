@@ -1,0 +1,46 @@
+---
+/* Cinta animada tipo placa. Items se repiten para loop continuo. */
+interface Props {
+  items: string[];
+}
+const { items } = Astro.props;
+const doubled = [...items, ...items];
+---
+
+<div class="marquee" role="presentation">
+  <div class="marquee__track">
+    {
+      doubled.map((it) => (
+        <span class="marquee__item">
+          {it}
+          <span class="marquee__dot" aria-hidden="true" />
+        </span>
+      ))
+    }
+  </div>
+</div>
+
+<style>
+  .marquee {
+    border-block: 1px solid var(--color-line);
+    background: oklch(0.19 0.035 262 / 0.5);
+    padding-block: 0.9rem;
+  }
+  .marquee__item {
+    display: inline-flex;
+    align-items: center;
+    gap: 2.5rem;
+    font-family: var(--font-display);
+    font-size: clamp(1rem, 3.4vw, 1.35rem);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--color-ink-soft);
+  }
+  .marquee__dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--color-brand-bright);
+    box-shadow: 0 0 10px 1px var(--color-brand-glow);
+  }
+</style>

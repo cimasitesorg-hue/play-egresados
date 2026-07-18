@@ -1,0 +1,193 @@
+---
+import { site, waLink, navLinks, zonas } from "@/data/site";
+import { withBase } from "@/lib/paths";
+import Icon from "./Icon.astro";
+const year = new Date().getFullYear();
+---
+
+<footer class="footer">
+  <div class="container-x footer__inner">
+    <div class="footer__brand">
+      <img
+        src={withBase("/img/logo-blanco-256.png")}
+        alt="PLAY Egresados"
+        width="150"
+        height="46"
+        loading="lazy"
+      />
+      <p>{site.descripcion}</p>
+      <div class="footer__socials">
+        <a
+          href={waLink}
+          target="_blank"
+          rel="noopener"
+          class="footer__social"
+          aria-label="WhatsApp"
+        >
+          <Icon name="wa" size={20} />
+        </a>
+        <a
+          href={site.instagram}
+          target="_blank"
+          rel="noopener"
+          class="footer__social"
+          aria-label="Instagram"
+        >
+          <Icon name="ig" size={20} />
+        </a>
+      </div>
+    </div>
+
+    <div class="footer__col">
+      <h3>Navegación</h3>
+      <ul>
+        {navLinks.map((l) => <li><a href={withBase(l.href)}>{l.label}</a></li>)}
+      </ul>
+    </div>
+
+    <div class="footer__col">
+      <h3>Operamos en CABA</h3>
+      <ul>
+        {zonas.map((z) => <li><span>{z}</span></li>)}
+      </ul>
+    </div>
+
+    <div class="footer__col footer__contact">
+      <h3>Sumate al mundo PLAY</h3>
+      <a href={waLink} target="_blank" rel="noopener" class="btn btn--wa">
+        <Icon name="wa" size={19} />
+        <span>Escribinos</span>
+      </a>
+      <a href={site.instagram} target="_blank" rel="noopener" class="footer__ig">
+        {site.instagramHandle}
+      </a>
+    </div>
+  </div>
+
+  <div class="container-x footer__bottom">
+    <p>© {year} {site.legalName}. Todos los derechos reservados.</p>
+    <p>Productora de eventos para egresados · Ciudad de Buenos Aires.</p>
+  </div>
+</footer>
+
+<style>
+  .footer {
+    position: relative;
+    margin-top: 4rem;
+    border-top: 1px solid var(--color-line);
+    background:
+      radial-gradient(
+        90% 60% at 50% 0%,
+        oklch(0.3 0.09 262 / 0.35),
+        transparent 70%
+      ),
+      var(--color-bg);
+    padding-top: 3.5rem;
+  }
+  .footer__inner {
+    display: grid;
+    gap: 2.5rem;
+    grid-template-columns: 1fr;
+    padding-bottom: 2.5rem;
+  }
+  .footer__brand img {
+    height: 40px;
+    width: auto;
+    margin-bottom: 1rem;
+  }
+  .footer__brand p {
+    color: var(--color-muted);
+    font-size: 0.95rem;
+    max-width: 42ch;
+  }
+  .footer__socials {
+    display: flex;
+    gap: 0.6rem;
+    margin-top: 1.25rem;
+  }
+  .footer__social {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    color: var(--color-ink);
+    background: oklch(0.23 0.04 262 / 0.7);
+    border: 1px solid var(--color-line);
+    transition:
+      transform 0.18s var(--ease-out),
+      border-color 0.2s var(--ease-out),
+      color 0.2s var(--ease-out);
+  }
+  .footer__social:hover {
+    color: var(--color-brand-glow);
+    border-color: var(--color-brand-bright);
+    transform: translateY(-2px);
+  }
+  .footer__social:active {
+    transform: scale(0.92);
+    transition-duration: 0.11s;
+  }
+  @media (hover: none) {
+    .footer__social:hover {
+      transform: none;
+    }
+  }
+  .footer__col h3 {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--color-ink);
+    margin: 0 0 1rem;
+  }
+  .footer__col ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.65rem;
+  }
+  .footer__col a,
+  .footer__col span {
+    color: var(--color-muted);
+    font-size: 0.95rem;
+    transition: color 0.18s var(--ease-out);
+  }
+  .footer__col a:hover {
+    color: var(--color-brand-glow);
+  }
+  .footer__contact .btn {
+    width: fit-content;
+  }
+  .footer__ig {
+    display: inline-block;
+    margin-top: 0.9rem;
+    color: var(--color-muted);
+    font-size: 0.95rem;
+  }
+  .footer__ig:hover {
+    color: var(--color-brand-glow);
+  }
+  .footer__bottom {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 1.5rem;
+    justify-content: space-between;
+    padding-top: 1.5rem;
+    padding-bottom: 2rem;
+    border-top: 1px solid var(--color-line);
+    color: var(--color-muted);
+    font-size: 0.82rem;
+  }
+  .footer__bottom p {
+    margin: 0;
+  }
+
+  @media (min-width: 720px) {
+    .footer__inner {
+      grid-template-columns: 1.6fr 1fr 1fr 1.2fr;
+    }
+  }
+</style>

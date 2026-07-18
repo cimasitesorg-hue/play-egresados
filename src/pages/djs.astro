@@ -1,0 +1,117 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import Icon from "@/components/Icon.astro";
+import DjCarousel from "@/components/DjCarousel.astro";
+import { waLink } from "@/data/site";
+---
+
+<BaseLayout
+  title="DJs exclusivos de PLAY Egresados"
+  description="Conocé a los DJs exclusivos de PLAY Egresados: Nicolas Emmanuel, Jere Ginés, Laucha Pedraza y Juani Perotti. Residentes de boliches que ponen la música en cada previa y UPD."
+  path="/djs/"
+>
+  <section class="page-hero">
+    <div class="container-x">
+      <span class="chip reveal">
+        <Icon name="music" size={15} />
+        Staff exclusivo PLAY
+      </span>
+      <h1 class="page-hero__title font-display reveal" style="--i:1">
+        Nuestros DJs
+      </h1>
+      <p class="page-hero__lead reveal" style="--i:2">
+        Un staff de DJs reconocidos, residentes de boliches y exclusivos de PLAY
+        Egresados. Son los que arman el clima de boliche en cada previa, UPD y
+        arriba del party bus.
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container-x">
+      <div class="reveal">
+        <DjCarousel />
+      </div>
+
+      <p class="djs-note reveal">
+        <Icon name="spark" size={16} />
+        Falta la foto de Laucha Pedraza (hoy tiene un placeholder). Pasanos su
+        foto tocando y su Instagram para completarlo.
+      </p>
+    </div>
+  </section>
+
+  {/* CTA */}
+  <section class="section">
+    <div class="container-x">
+      <div class="djs-cta reveal">
+        <div>
+          <h2 class="section__title">¿Querés que toquen en tu previa?</h2>
+          <p class="section__lead">
+            Contanos tu colegio y fecha, y armamos la producción con el DJ que
+            mejor le va a tu curso.
+          </p>
+        </div>
+        <a href={waLink} target="_blank" rel="noopener" class="btn btn--wa">
+          <Icon name="wa" size={20} />
+          <span>Escribinos</span>
+        </a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .djs-note {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    margin-top: 1.5rem;
+    padding: 0.9rem 1.1rem;
+    border-radius: 0.8rem;
+    background: oklch(0.62 0.2 258 / 0.08);
+    border: 1px solid oklch(0.62 0.2 258 / 0.22);
+    color: var(--color-muted);
+    font-size: 0.88rem;
+  }
+  .djs-note :global(svg) {
+    flex: none;
+    color: var(--color-brand-glow);
+  }
+  .djs-note code {
+    color: var(--color-ink-soft);
+    background: oklch(0.27 0.045 262 / 0.6);
+    padding: 0.1rem 0.4rem;
+    border-radius: 5px;
+    font-size: 0.85em;
+  }
+
+  .djs-cta {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    align-items: flex-start;
+    padding: clamp(1.75rem, 5vw, 2.75rem);
+    border-radius: 1.25rem;
+    background: linear-gradient(
+      140deg,
+      oklch(0.24 0.06 262 / 0.7),
+      oklch(0.17 0.03 262 / 0.7)
+    );
+    border: 1px solid oklch(0.62 0.2 258 / 0.35);
+  }
+  .djs-cta .section__title {
+    font-size: clamp(1.5rem, 4vw, 2.2rem);
+  }
+  .djs-cta .btn {
+    flex: none;
+  }
+
+  @media (min-width: 780px) {
+    .djs-cta {
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+    }
+  }
+</style>

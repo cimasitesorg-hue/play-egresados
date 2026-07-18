@@ -1,0 +1,938 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import Icon from "@/components/Icon.astro";
+import Marquee from "@/components/Marquee.astro";
+import { eventos } from "@/data/eventos";
+import { servicios } from "@/data/servicios";
+import { site, waLink, zonas } from "@/data/site";
+import { withBase } from "@/lib/paths";
+
+const marqueeItems = [
+  "Previas",
+  "UPD",
+  "UVI",
+  "USS",
+  "Prefiesta",
+  "Party Bus",
+  "Barra Libre",
+];
+// Servicios destacados para la grilla resumen del home
+const resumen = servicios.slice(0, 6);
+const trust = [
+  { icon: "seguridad", label: "Seguridad en unidades" },
+  { icon: "medico", label: "Servicio médico" },
+  { icon: "barra", label: "Barra libre" },
+];
+---
+
+<BaseLayout
+  title="Previas, UPD y eventos de egresados en CABA"
+  description="PLAY Egresados es la productora que hace de tu previa, UPD, UVI o prefiesta un momento único. Salón, party bus, seguridad, barra libre y servicio médico en distintos barrios de Capital Federal."
+  path="/"
+>
+  {/* ===================== HERO ===================== */}
+  <section class="hero">
+    <div class="hero__bg" aria-hidden="true" data-parallax="0.08">
+      <div class="hero__slides">
+        <img
+          class="hero__slide"
+          src={withBase("/img/hero/hero-1.webp")}
+          alt=""
+          width="1500"
+          height="1000"
+          fetchpriority="high"
+        />
+        <img
+          class="hero__slide"
+          src={withBase("/img/hero/hero-2.webp")}
+          alt=""
+          width="1500"
+          height="1000"
+          loading="lazy"
+        />
+        <img
+          class="hero__slide"
+          src={withBase("/img/hero/hero-3.webp")}
+          alt=""
+          width="1500"
+          height="1000"
+          loading="lazy"
+        />
+      </div>
+      <div class="hero__grid"></div>
+    </div>
+
+    <div class="container-x hero__content">
+      <span class="chip reveal">
+        <Icon name="spark" size={15} />
+        Productora de eventos para egresados · CABA
+      </span>
+
+      <h1 class="hero__title font-display reveal" style="--i:1">
+        Sumate al mundo <span class="accent">PLAY</span>
+      </h1>
+
+      <p class="hero__sub reveal" style="--i:2">
+        Producimos cada etapa de tu recorrido de egresados —previa, UPD, UVI,
+        USS y prefiesta— con salón equipado, party bus, seguridad, barra libre y
+        servicio médico. Vos disfrutás, de la producción nos ocupamos nosotros.
+      </p>
+
+      <div class="hero__cta reveal" style="--i:3">
+        <a href={waLink} target="_blank" rel="noopener" class="btn btn--wa">
+          <Icon name="wa" size={20} />
+          <span>Pedí tu presupuesto</span>
+        </a>
+        <a href={withBase("/servicios/")} class="btn btn--ghost">
+          Ver todo lo que incluye
+          <Icon name="arrow" size={18} />
+        </a>
+      </div>
+
+      <ul class="hero__badges reveal" style="--i:4">
+        {
+          trust.map((t) => (
+            <li>
+              <Icon name={t.icon} size={18} />
+              {t.label}
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+
+    <a class="hero__scroll" href="#quienes" aria-label="Ver más">
+      <Icon name="arrow-down" size={20} />
+    </a>
+  </section>
+
+  <Marquee items={marqueeItems} />
+
+  {/* ===================== QUIÉNES SOMOS ===================== */}
+  <section id="quienes" class="section">
+    <div class="container-x quienes">
+      <div class="quienes__text">
+        <h2 class="section__title reveal">
+          La productora que se toma en serio la previa de tus hijos
+        </h2>
+        <p class="reveal" style="--i:2">
+          En PLAY Egresados no organizamos "la fiesta de egresados" tradicional:
+          somos la productora que arma cada evento del recorrido. La previa es un
+          momento único en la vida de los chicos y lo asumimos con esa
+          responsabilidad, para que la pasen increíble y las familias se queden
+          tranquilas.
+        </p>
+        <div class="quienes__stats reveal" style="--i:3">
+          <div class="stat">
+            <span class="stat__icon"><Icon name="spark" size={22} /></span>
+            <span class="stat__title">Variedad de eventos</span>
+            <span class="stat__label">UPD, UVI, USS, prefiesta, previa y más.</span>
+          </div>
+          <div class="stat">
+            <span class="stat__icon"><Icon name="check" size={22} /></span>
+            <span class="stat__title">Servicio integral</span>
+            <span class="stat__label"
+              >Salón, traslado, barra libre y seguridad, todo incluido.</span
+            >
+          </div>
+          <div class="stat">
+            <span class="stat__icon"><Icon name="map" size={22} /></span>
+            <span class="stat__title">Toda Capital Federal</span>
+            <span class="stat__label"
+              >Locales exclusivos por distintos barrios de CABA.</span
+            >
+          </div>
+        </div>
+      </div>
+      <aside class="quienes__card card reveal" style="--i:2">
+        <Icon name="spark" size={22} class="quienes__spark" />
+        <p class="quienes__quote">
+          “Queremos que cada previa sea un momento único. Con esa
+          responsabilidad la producimos.”
+        </p>
+        <span class="quienes__by">— Equipo PLAY Egresados</span>
+      </aside>
+    </div>
+  </section>
+
+  {/* ===================== TIPOS DE EVENTO ===================== */}
+  <section class="section section--soft">
+    <div class="container-x">
+      <div class="section__head">
+        <p class="kicker reveal">Qué producimos</p>
+        <h2 class="section__title reveal" style="--i:1">
+          Todo el recorrido de egresados, un solo equipo
+        </h2>
+        <p class="section__lead reveal" style="--i:2">
+          Cada etapa tiene su producción, con la misma logística, seguridad y
+          energía PLAY.
+        </p>
+      </div>
+
+      <div class="evlist">
+        {
+          eventos.map((ev, i) => (
+            <a
+              href={waLink}
+              target="_blank"
+              rel="noopener"
+              class="evrow reveal"
+              style={`--i:${i}`}
+            >
+              <span class="evrow__name font-display">{ev.nombre}</span>
+              <span class="evrow__body">
+                {ev.sigla && <span class="evrow__sigla">{ev.sigla}</span>}
+                <span class="evrow__desc">{ev.descripcion}</span>
+              </span>
+              <span class="evrow__cta">
+                <span class="evrow__cta-text">Consultar</span>
+                <Icon name="arrow" size={20} />
+              </span>
+            </a>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  {/* ===================== RESUMEN DE SERVICIOS ===================== */}
+  <section class="section">
+    <div class="container-x">
+      <div class="section__head">
+        <h2 class="section__title reveal">
+          Una producción completa, sin sorpresas
+        </h2>
+        <p class="section__lead reveal" style="--i:2">
+          Estos son algunos de los servicios que incluye cada evento. Mirá el
+          detalle completo en la página de servicios.
+        </p>
+      </div>
+
+      <div class="serv-grid">
+        {
+          resumen.map((s, i) => (
+            <article class="serv-card reveal" style={`--i:${i}`}>
+              <span class="serv-card__icon">
+                <Icon name={s.icon} size={24} />
+              </span>
+              <h3 class="serv-card__title">{s.titulo}</h3>
+              <p class="serv-card__text">{s.resumen}</p>
+            </article>
+          ))
+        }
+      </div>
+
+      <div class="section__cta reveal">
+        <a href={withBase("/servicios/")} class="btn">
+          Ver todos los servicios
+          <Icon name="arrow" size={18} />
+        </a>
+      </div>
+    </div>
+  </section>
+
+  {/* ===================== CONFIANZA PARA FAMILIAS ===================== */}
+  <section class="section section--trust">
+    <div class="container-x">
+      <div class="section__head">
+        <p class="kicker kicker--light reveal">Para las familias</p>
+        <h2 class="section__title reveal" style="--i:1">
+          Tranquilidad de principio a fin
+        </h2>
+        <p class="section__lead reveal" style="--i:2">
+          Pensamos cada detalle para que los chicos la pasen bien y ustedes se
+          queden tranquilos.
+        </p>
+      </div>
+
+      <div class="trust-grid">
+        <article class="trust-card trust-card--wide reveal">
+          <span class="trust-card__icon"><Icon name="seguridad" size={26} /></span>
+          <h3>Seguridad en cada traslado</h3>
+          <p>
+            Party bus con cámaras internas y externas, chofer profesional,
+            coordinador a bordo, limitador de puertas, ventanillas expulsables y
+            equipos VIGIA. El traslado es tan seguro como divertido.
+          </p>
+        </article>
+        <article class="trust-card reveal" style="--i:1">
+          <span class="trust-card__icon"><Icon name="medico" size={26} /></span>
+          <h3>Servicio médico</h3>
+          <p>
+            Enfermeros y paramédicos presentes en el salón durante todo el
+            evento, listos para lo que haga falta.
+          </p>
+        </article>
+        <article class="trust-card reveal" style="--i:2">
+          <span class="trust-card__icon"><Icon name="padres" size={26} /></span>
+          <h3>Sector para padres VIP</h3>
+          <p>
+            Un espacio exclusivo para las familias, con servicio de lunch y
+            bebida incluido.
+          </p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  {/* ===================== OPERAMOS EN CABA ===================== */}
+  <section class="section">
+    <div class="container-x zonas">
+      <div class="zonas__text">
+        <h2 class="section__title reveal">
+          Locales por toda Capital Federal
+        </h2>
+        <p class="reveal" style="--i:2">
+          Tenemos salones exclusivos y equipados en distintos barrios de la
+          Ciudad de Buenos Aires. Estos son algunos; consultanos por el más
+          cercano a tu colegio.
+        </p>
+        <a
+          href={waLink}
+          target="_blank"
+          rel="noopener"
+          class="btn btn--ghost reveal"
+          style="--i:3"
+        >
+          <Icon name="map" size={18} />
+          Consultar disponibilidad
+        </a>
+      </div>
+      <ul class="zonas__list">
+        {
+          zonas.map((z, i) => (
+            <li class="zona reveal" style={`--i:${i}`}>
+              <Icon name="map" size={20} />
+              <span>{z}</span>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+
+  {/* ===================== CTA FINAL ===================== */}
+  <section class="section">
+    <div class="container-x">
+      <div class="cta-final reveal">
+        <div class="cta-final__glow" aria-hidden="true"></div>
+        <h2 class="cta-final__title font-display">
+          ¿Arrancamos tu previa?
+        </h2>
+        <p class="cta-final__text">
+          Escribinos por WhatsApp con tu colegio y curso. Te armamos el
+          presupuesto con todo lo que incluye la producción PLAY.
+        </p>
+        <div class="cta-final__actions">
+          <a href={waLink} target="_blank" rel="noopener" class="btn btn--wa">
+            <Icon name="wa" size={20} />
+            <span>Escribinos por WhatsApp</span>
+          </a>
+          <a href={site.instagram} target="_blank" rel="noopener" class="btn btn--ghost">
+            <Icon name="ig" size={18} />
+            {site.instagramHandle}
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  /* .section, .section--soft, .section__head, .kicker, .section__title y
+     .section__lead viven en global.css (sistema compartido entre páginas). */
+  .section__cta {
+    margin-top: 2.5rem;
+    display: flex;
+    justify-content: center;
+  }
+
+  /* ---------- HERO ---------- */
+  .hero {
+    position: relative;
+    min-height: min(92svh, 820px);
+    display: flex;
+    align-items: center;
+    padding-block: clamp(4rem, 12vh, 8rem);
+    overflow: hidden;
+    isolation: isolate;
+  }
+  .hero__bg {
+    position: absolute;
+    inset: -8% 0 0;
+    z-index: -1;
+    will-change: transform;
+  }
+  /* Slideshow de fotos reales de eventos (crossfade) */
+  .hero__slides {
+    position: absolute;
+    inset: 0;
+  }
+  .hero__slide {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 50% 42%;
+    opacity: 0;
+    transform: scale(1.05);
+    /* oscurece la foto en origen para dar contraste al texto */
+    filter: brightness(0.4) saturate(1.05) contrast(1.03);
+  }
+  .hero__slide:first-child {
+    opacity: 1; /* visible por defecto (fallback sin animación / reduced-motion) */
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    /* opacidad + un zoom lento (Ken Burns) para que respire */
+    .hero__slide {
+      animation: hero-cross 21s linear infinite;
+    }
+    .hero__slide:nth-child(1) {
+      animation-delay: 0s;
+    }
+    .hero__slide:nth-child(2) {
+      animation-delay: 7s;
+    }
+    .hero__slide:nth-child(3) {
+      animation-delay: 14s;
+    }
+    @keyframes hero-cross {
+      0% {
+        opacity: 0;
+        transform: scale(1.03);
+      }
+      4%,
+      29% {
+        opacity: 1;
+      }
+      36%,
+      100% {
+        opacity: 0;
+        transform: scale(1.13);
+      }
+    }
+  }
+  /* velo oscuro para contraste del texto sobre las fotos (>=4.5:1 a la izquierda) */
+  .hero::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background:
+      linear-gradient(
+        90deg,
+        oklch(0.12 0.03 262 / 0.95) 0%,
+        oklch(0.13 0.03 262 / 0.85) 45%,
+        oklch(0.13 0.03 262 / 0.7) 100%
+      ),
+      linear-gradient(
+        0deg,
+        var(--color-bg) 3%,
+        oklch(0.13 0.03 262 / 0.45) 45%,
+        oklch(0.13 0.03 262 / 0.62) 100%
+      );
+  }
+  .hero__grid {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(oklch(0.62 0.2 258 / 0.05) 1px, transparent 1px),
+      linear-gradient(90deg, oklch(0.62 0.2 258 / 0.05) 1px, transparent 1px);
+    background-size: 46px 46px;
+    -webkit-mask-image: radial-gradient(70% 60% at 30% 40%, #000, transparent 75%);
+    mask-image: radial-gradient(70% 60% at 30% 40%, #000, transparent 75%);
+  }
+  .hero__content {
+    max-width: 42rem;
+  }
+  .hero__title {
+    font-size: clamp(2.9rem, 11vw, 5.75rem);
+    line-height: 0.94;
+    margin: 1.1rem 0 0;
+    color: var(--color-ink);
+    text-shadow: 0 2px 40px oklch(0.15 0.028 262 / 0.8);
+  }
+  .hero__sub {
+    margin: 1.35rem 0 0;
+    font-size: clamp(1.02rem, 2.4vw, 1.2rem);
+    color: var(--color-ink-soft);
+    max-width: 46ch;
+  }
+  .hero__cta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+    margin-top: 2rem;
+  }
+  .hero__badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 1.4rem;
+    list-style: none;
+    padding: 0;
+    margin: 2.2rem 0 0;
+  }
+  .hero__badges li {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--color-muted);
+  }
+  .hero__badges :global(svg) {
+    color: var(--color-brand-glow);
+  }
+  .hero__scroll {
+    position: absolute;
+    left: 50%;
+    bottom: 1.5rem;
+    transform: translateX(-50%);
+    display: grid;
+    place-items: center;
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    color: var(--color-ink-soft);
+    border: 1px solid var(--color-line);
+    background: oklch(0.19 0.035 262 / 0.5);
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .hero__scroll {
+      animation: bob 2.2s var(--ease-in-out) infinite;
+    }
+    @keyframes bob {
+      50% {
+        transform: translate(-50%, 6px);
+      }
+    }
+  }
+
+  /* ---------- QUIÉNES SOMOS ---------- */
+  .quienes {
+    display: grid;
+    gap: 2.5rem;
+    grid-template-columns: 1fr;
+    align-items: start;
+  }
+  .quienes__text p {
+    color: var(--color-muted);
+    font-size: 1.06rem;
+    max-width: 58ch;
+  }
+  .quienes__stats {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+    margin-top: 2rem;
+  }
+  .stat {
+    padding: 1.3rem 1.3rem 1.4rem;
+    border-radius: 0.9rem;
+    background: oklch(0.23 0.04 262 / 0.4);
+    border: 1px solid var(--color-line);
+    transition:
+      transform 0.24s var(--ease-out),
+      border-color 0.24s var(--ease-out);
+  }
+  .stat:hover {
+    transform: translateY(-3px);
+    border-color: oklch(0.62 0.2 258 / 0.45);
+  }
+  .stat__icon {
+    display: grid;
+    place-items: center;
+    width: 46px;
+    height: 46px;
+    border-radius: 12px;
+    color: var(--color-brand-glow);
+    background: oklch(0.62 0.2 258 / 0.14);
+    border: 1px solid oklch(0.62 0.2 258 / 0.28);
+    margin-bottom: 0.9rem;
+  }
+  .stat__title {
+    display: block;
+    font-size: 1.06rem;
+    font-weight: 700;
+    color: var(--color-ink);
+    line-height: 1.2;
+  }
+  .stat__label {
+    display: block;
+    margin-top: 0.35rem;
+    font-size: 0.9rem;
+    color: var(--color-muted);
+  }
+  .quienes__card {
+    position: relative;
+    padding: 1.75rem;
+    overflow: hidden;
+  }
+  .quienes__spark {
+    color: var(--color-brand-glow);
+  }
+  .quienes__quote {
+    font-size: 1.35rem;
+    font-weight: 600;
+    color: var(--color-ink);
+    line-height: 1.4;
+    margin: 1rem 0 0;
+  }
+  .quienes__by {
+    display: block;
+    margin-top: 1rem;
+    color: var(--color-muted);
+    font-size: 0.92rem;
+  }
+
+  /* ---------- EVENTOS (lista tipográfica tipo índice) ---------- */
+  .evlist {
+    border-top: 1px solid var(--color-line);
+  }
+  .evrow {
+    position: relative;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    grid-template-areas:
+      "name cta"
+      "body body";
+    align-items: center;
+    gap: 0.35rem 1rem;
+    padding: clamp(1.4rem, 3.5vw, 2.1rem) 0.25rem;
+    border-bottom: 1px solid var(--color-line);
+    color: var(--color-ink);
+    isolation: isolate;
+    transition: color 0.25s var(--ease-out);
+  }
+  /* barrido de fondo al pasar (aparece desde la izquierda) */
+  .evrow::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: linear-gradient(
+      90deg,
+      oklch(0.27 0.05 262 / 0.65),
+      transparent 75%
+    );
+    opacity: 0;
+    transform: translateX(-10px);
+    transition:
+      opacity 0.3s var(--ease-out),
+      transform 0.3s var(--ease-out);
+  }
+  .evrow__name {
+    grid-area: name;
+    font-size: clamp(2.4rem, 9vw, 4.6rem);
+    line-height: 0.9;
+    letter-spacing: 0.01em;
+    color: var(--color-ink);
+    transition:
+      transform 0.3s var(--ease-out),
+      color 0.25s var(--ease-out);
+  }
+  .evrow__body {
+    grid-area: body;
+    max-width: 60ch;
+  }
+  .evrow__sigla {
+    display: block;
+    font-size: 0.82rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--color-brand-glow);
+    margin-bottom: 0.3rem;
+  }
+  .evrow__desc {
+    display: block;
+    color: var(--color-muted);
+    font-size: 0.98rem;
+    line-height: 1.5;
+  }
+  .evrow__cta {
+    grid-area: cta;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    align-self: start;
+    padding-top: 0.7rem;
+    font-weight: 700;
+    font-size: 0.9rem;
+    color: var(--color-muted);
+    transition: color 0.25s var(--ease-out);
+  }
+  .evrow__cta-text {
+    /* se muestra recién en desktop al hacer hover */
+    display: none;
+  }
+  .evrow__cta :global(svg) {
+    flex: none;
+    transition: transform 0.3s var(--ease-out);
+  }
+  /* Hover (mouse): nombre se desplaza + acento, fondo entra, flecha avanza */
+  @media (hover: hover) and (pointer: fine) {
+    .evrow:hover .evrow__name {
+      color: var(--color-brand-glow);
+      transform: translateX(10px);
+    }
+    .evrow:hover::before {
+      opacity: 1;
+      transform: none;
+    }
+    .evrow:hover .evrow__cta {
+      color: var(--color-brand-glow);
+    }
+    .evrow:hover .evrow__cta-text {
+      display: inline;
+    }
+    .evrow:hover .evrow__cta :global(svg) {
+      transform: translateX(4px);
+    }
+  }
+  .evrow:active .evrow__name {
+    transform: scale(0.99);
+  }
+
+  /* ---------- SERVICIOS RESUMEN ---------- */
+  .serv-grid {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: 1fr;
+  }
+  .serv-card {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.6rem;
+    padding: 1.5rem;
+    border-radius: 1rem;
+    background: oklch(0.23 0.04 262 / 0.4);
+    border: 1px solid var(--color-line);
+  }
+  .serv-card__icon {
+    display: grid;
+    place-items: center;
+    width: 50px;
+    height: 50px;
+    border-radius: 13px;
+    color: var(--color-brand-glow);
+    background: oklch(0.62 0.2 258 / 0.14);
+    border: 1px solid oklch(0.62 0.2 258 / 0.28);
+  }
+  .serv-card__title {
+    font-size: 1.12rem;
+    font-weight: 700;
+    color: var(--color-ink);
+    margin: 0.3rem 0 0;
+  }
+  .serv-card__text {
+    color: var(--color-muted);
+    font-size: 0.95rem;
+    margin: 0;
+  }
+
+  /* ---------- TRUST (familias) ---------- */
+  .section--trust {
+    background:
+      radial-gradient(
+        70% 80% at 50% 0%,
+        oklch(0.3 0.11 260 / 0.35),
+        transparent 65%
+      ),
+      oklch(0.16 0.03 262);
+    border-block: 1px solid var(--color-line);
+  }
+  .kicker--light {
+    color: var(--color-brand-glow);
+  }
+  .trust-grid {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: 1fr;
+  }
+  .trust-card {
+    padding: 1.75rem;
+    border-radius: 1.1rem;
+    background: linear-gradient(
+      180deg,
+      oklch(0.24 0.05 262 / 0.7),
+      oklch(0.18 0.035 262 / 0.7)
+    );
+    border: 1px solid var(--color-line);
+  }
+  .trust-card__icon {
+    display: grid;
+    place-items: center;
+    width: 54px;
+    height: 54px;
+    border-radius: 14px;
+    color: white;
+    background: linear-gradient(
+      140deg,
+      var(--color-brand-bright),
+      var(--color-brand)
+    );
+    box-shadow: 0 10px 30px -10px oklch(0.62 0.2 258 / 0.8);
+    margin-bottom: 1.1rem;
+  }
+  .trust-card h3 {
+    font-size: 1.25rem;
+    margin: 0 0 0.5rem;
+  }
+  .trust-card p {
+    color: var(--color-muted);
+    font-size: 0.98rem;
+    margin: 0;
+  }
+
+  /* ---------- ZONAS ---------- */
+  .zonas {
+    display: grid;
+    gap: 2.5rem;
+    grid-template-columns: 1fr;
+    align-items: center;
+  }
+  .zonas__text p {
+    color: var(--color-muted);
+    font-size: 1.06rem;
+    max-width: 46ch;
+    margin-bottom: 1.5rem;
+  }
+  .zonas__list {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.85rem;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  .zona {
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+    padding: 1.1rem 1.2rem;
+    border-radius: 0.9rem;
+    background: oklch(0.23 0.04 262 / 0.45);
+    border: 1px solid var(--color-line);
+    font-weight: 600;
+    color: var(--color-ink-soft);
+    transition:
+      transform 0.24s var(--ease-out),
+      border-color 0.24s var(--ease-out);
+  }
+  .zona:hover {
+    transform: translateY(-3px);
+    border-color: oklch(0.62 0.2 258 / 0.5);
+  }
+  .zona :global(svg) {
+    color: var(--color-brand-glow);
+    flex: none;
+  }
+
+  /* ---------- CTA FINAL ---------- */
+  .cta-final {
+    position: relative;
+    text-align: center;
+    padding: clamp(2.5rem, 7vw, 4.5rem) clamp(1.25rem, 5vw, 3rem);
+    border-radius: 1.5rem;
+    border: 1px solid oklch(0.62 0.2 258 / 0.4);
+    background: linear-gradient(
+      180deg,
+      oklch(0.24 0.06 262 / 0.7),
+      oklch(0.17 0.03 262 / 0.7)
+    );
+    overflow: hidden;
+    isolation: isolate;
+  }
+  .cta-final__glow {
+    position: absolute;
+    inset: auto 0 -60% 0;
+    height: 100%;
+    background: radial-gradient(
+      50% 100% at 50% 100%,
+      oklch(0.62 0.2 258 / 0.45),
+      transparent 70%
+    );
+    z-index: -1;
+  }
+  .cta-final__title {
+    font-size: clamp(2rem, 6vw, 3.5rem);
+    color: var(--color-ink);
+    margin: 0;
+  }
+  .cta-final__text {
+    max-width: 48ch;
+    margin: 1rem auto 0;
+    color: var(--color-ink-soft);
+    font-size: 1.05rem;
+  }
+  .cta-final__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+    justify-content: center;
+    margin-top: 2rem;
+  }
+
+  /* Touch: sin hover "pegajoso" (criterio Emil para touch) + feedback al tocar
+     solo en lo que es realmente un link. */
+  @media (hover: none) {
+    .stat:hover,
+    .zona:hover {
+      transform: none;
+      box-shadow: none;
+    }
+    /* En touch no hay hover: la flecha de cada fila señala que es tocable */
+    .evrow__cta {
+      color: var(--color-brand-glow);
+    }
+  }
+
+  /* ---------- Responsive ---------- */
+  @media (min-width: 680px) {
+    .serv-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    .trust-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    .trust-card--wide {
+      grid-column: 1 / -1;
+    }
+    .quienes__stats {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+  /* Fila de evento en línea (índice) desde tablet */
+  @media (min-width: 760px) {
+    .evrow {
+      grid-template-columns: minmax(auto, 40%) 1fr auto;
+      grid-template-areas: "name body cta";
+      align-items: center;
+      gap: 0 2.5rem;
+    }
+    .evrow__cta {
+      align-self: center;
+      padding-top: 0;
+    }
+  }
+  @media (min-width: 900px) {
+    .quienes {
+      grid-template-columns: 1.4fr 1fr;
+    }
+    .serv-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+    .trust-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+    .zonas {
+      grid-template-columns: 1fr 1fr;
+    }
+    .zonas__list {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+</style>
