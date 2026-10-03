@@ -23,3 +23,6 @@ pnpm-debug.log*
 Thumbs.db
 .vscode/
 .idea/
+
+# impeccable tooling (cache/artefactos locales)
+.impeccable/

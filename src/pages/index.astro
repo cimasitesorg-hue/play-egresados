@@ -176,7 +176,7 @@ const trust = [
               target="_blank"
               rel="noopener"
               class="evrow reveal"
-              style={`--i:${i}`}
+              style={`--i:${i}; --ev:${ev.accent}`}
             >
               <span class="evrow__name font-display">{ev.nombre}</span>
               <span class="evrow__body">
@@ -602,7 +602,7 @@ const trust = [
     z-index: -1;
     background: linear-gradient(
       90deg,
-      oklch(0.27 0.05 262 / 0.65),
+      color-mix(in oklab, var(--ev, var(--color-brand-bright)) 20%, transparent),
       transparent 75%
     );
     opacity: 0;
@@ -631,7 +631,7 @@ const trust = [
     font-weight: 700;
     letter-spacing: 0.04em;
     text-transform: uppercase;
-    color: var(--color-brand-glow);
+    color: var(--ev, var(--color-brand-glow));
     margin-bottom: 0.3rem;
   }
   .evrow__desc {
@@ -649,7 +649,7 @@ const trust = [
     padding-top: 0.7rem;
     font-weight: 700;
     font-size: 0.9rem;
-    color: var(--color-muted);
+    color: var(--ev, var(--color-brand-glow));
     transition: color 0.25s var(--ease-out);
   }
   .evrow__cta-text {
@@ -663,15 +663,12 @@ const trust = [
   /* Hover (mouse): nombre se desplaza + acento, fondo entra, flecha avanza */
   @media (hover: hover) and (pointer: fine) {
     .evrow:hover .evrow__name {
-      color: var(--color-brand-glow);
+      color: var(--ev, var(--color-brand-glow));
       transform: translateX(10px);
     }
     .evrow:hover::before {
       opacity: 1;
       transform: none;
-    }
-    .evrow:hover .evrow__cta {
-      color: var(--color-brand-glow);
     }
     .evrow:hover .evrow__cta-text {
       display: inline;
@@ -872,10 +869,6 @@ const trust = [
     .zona:hover {
       transform: none;
       box-shadow: none;
-    }
-    /* En touch no hay hover: la flecha de cada fila señala que es tocable */
-    .evrow__cta {
-      color: var(--color-brand-glow);
     }
   }
 
