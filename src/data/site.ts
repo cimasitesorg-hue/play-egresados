@@ -23,13 +23,15 @@ export const waLink = `https://wa.me/${site.whatsappNumber}?text=${encodeURIComp
   site.whatsappText,
 )}`;
 
-// Zonas donde opera PLAY (SEO local CABA / zona oeste)
+// Zonas donde opera PLAY (SEO local CABA)
 export const zonas = [
   "Flores",
   "Caballito",
   "Villa Pueyrredón",
   "Devoto",
   "Mataderos",
+  "Palermo",
+  "Belgrano",
 ];
 
 // Navegación principal
