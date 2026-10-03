@@ -18,11 +18,6 @@ const marqueeItems = [
 ];
 // Servicios destacados para la grilla resumen del home
 const resumen = servicios.slice(0, 6);
-const trust = [
-  { icon: "seguridad", label: "Seguridad en unidades" },
-  { icon: "medico", label: "Servicio médico" },
-  { icon: "barra", label: "Barra libre" },
-];
 ---
 
 <BaseLayout
@@ -62,22 +57,16 @@ const trust = [
     </div>
 
     <div class="container-x hero__content">
-      <span class="chip reveal">
-        <Icon name="spark" size={15} />
-        Productora de eventos para egresados · CABA
-      </span>
-
-      <h1 class="hero__title font-display reveal" style="--i:1">
+      <h1 class="hero__title font-display reveal">
         Sumate al mundo <span class="accent">PLAY</span>
       </h1>
 
-      <p class="hero__sub reveal" style="--i:2">
-        Producimos cada etapa de tu recorrido de egresados (previa, UPD, UVI,
-        USS y prefiesta) con salón equipado, party bus, seguridad, barra libre y
-        servicio médico. Vos disfrutás, de la producción nos ocupamos nosotros.
+      <p class="hero__sub reveal" style="--i:1">
+        Producimos cada etapa del recorrido de egresados (previa, UPD,
+        prefiesta) con todo incluido: salón, party bus, barra y seguridad.
       </p>
 
-      <div class="hero__cta reveal" style="--i:3">
+      <div class="hero__cta reveal" style="--i:2">
         <a href={waLink} target="_blank" rel="noopener" class="btn btn--wa">
           <Icon name="wa" size={20} />
           <span>Pedí tu presupuesto</span>
@@ -87,22 +76,7 @@ const trust = [
           <Icon name="arrow" size={18} />
         </a>
       </div>
-
-      <ul class="hero__badges reveal" style="--i:4">
-        {
-          trust.map((t) => (
-            <li>
-              <Icon name={t.icon} size={18} />
-              {t.label}
-            </li>
-          ))
-        }
-      </ul>
     </div>
-
-    <a class="hero__scroll" href="#quienes" aria-label="Ver más">
-      <Icon name="arrow-down" size={20} />
-    </a>
   </section>
 
   <Marquee items={marqueeItems} />
@@ -453,49 +427,6 @@ const trust = [
     flex-wrap: wrap;
     gap: 0.8rem;
     margin-top: 2rem;
-  }
-  .hero__badges {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem 1.4rem;
-    list-style: none;
-    padding: 0;
-    margin: 2.2rem 0 0;
-  }
-  .hero__badges li {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    font-size: 0.9rem;
-    font-weight: 600;
-    color: var(--color-muted);
-  }
-  .hero__badges :global(svg) {
-    color: var(--color-brand-glow);
-  }
-  .hero__scroll {
-    position: absolute;
-    left: 50%;
-    bottom: 1.5rem;
-    transform: translateX(-50%);
-    display: grid;
-    place-items: center;
-    width: 42px;
-    height: 42px;
-    border-radius: 50%;
-    color: var(--color-ink-soft);
-    border: 1px solid var(--color-line);
-    background: oklch(0.19 0.035 262 / 0.5);
-  }
-  @media (prefers-reduced-motion: no-preference) {
-    .hero__scroll {
-      animation: bob 2.2s var(--ease-in-out) infinite;
-    }
-    @keyframes bob {
-      50% {
-        transform: translate(-50%, 6px);
-      }
-    }
   }
 
   /* ---------- QUIÉNES SOMOS ---------- */
