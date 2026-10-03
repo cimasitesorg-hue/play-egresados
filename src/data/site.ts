@@ -15,7 +15,7 @@ export const site = {
   email: "", // opcional, si lo agregan más adelante
   claim: "La producción que hace de la previa un momento único.",
   descripcion:
-    "Somos PLAY Egresados, productora argentina de eventos para egresados en CABA. Producimos cada etapa del recorrido —previas, UPD, UVI, USS y prefiesta— con salón, party bus, seguridad, barra libre y servicio médico incluidos.",
+    "Somos PLAY Egresados, productora argentina de eventos para egresados en CABA. Producimos cada etapa del recorrido (previas, UPD, UVI, USS y prefiesta) con salón, party bus, seguridad, barra libre y servicio médico incluidos.",
 };
 
 // Link a WhatsApp ya armado
